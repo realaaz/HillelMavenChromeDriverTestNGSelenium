@@ -1,3 +1,4 @@
+import com.sun.xml.internal.bind.v2.TODO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,6 +34,7 @@ public class L121_AppTestUp {
         numberOfIntegers.sendKeys("1");
 
         // get min / max data
+        // ??? add possibility read from page these parameters !!!
         String numbersMax = browser.findElement(By.cssSelector("input[name = 'max']")).getText();
         String numbersMin = browser.findElement(By.cssSelector("input[name = 'min']")).getText();
 
