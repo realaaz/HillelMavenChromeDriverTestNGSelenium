@@ -23,24 +23,33 @@ public class L121_AppTestUp {
     }
 
     @Test //01
-    public void myTest() {
-
+    public void myTest() throws InterruptedException {
 
         browser.get("https://www.random.org/integers/");
 
-        WebElement maxNumberInput = browser.findElement(By.cssSelector("input[name = 'num']"));
-        maxNumberInput.clear();
-        maxNumberInput.sendKeys("1");
+        // set area of integers
+        WebElement numberOfIntegers = browser.findElement(By.cssSelector("input[name = 'num']"));
+        numberOfIntegers.clear();
+        numberOfIntegers.sendKeys("1");
 
+        // get min / max data
+        String numbersMax = browser.findElement(By.cssSelector("input[name = 'max']")).getText();
+        String numbersMin = browser.findElement(By.cssSelector("input[name = 'min']")).getText();
+
+        // go to result page
         browser.findElement(By.cssSelector("input[value = 'Get Numbers']")).click();
 
+        // find generated data
         String numbers = browser.findElement(By.cssSelector("pre[class = 'data']")).getText();
 
-        System.out.println(numbers);
-        
+        System.out.println(numbersMin + " | " + numbersMax + " | "  + numbers);
+
         // convert to int
-        // assert is that new int within mix/max
-        Assert.assertTrue(numbers.length() > 0, "Negative case message");
+        int numbersInt = Integer.parseInt(numbers.replaceAll( "[^\\d]", "" ));;
+        System.out.print(numbersInt);
+
+        // assert: is that new int within mix (0) / max (10)
+        Assert.assertTrue(numbersInt >= 0 && numbersInt <= 10, "Negative case message: ");
 
     }
 
