@@ -34,8 +34,8 @@ public class L121_AppTestUp {
         numberOfIntegers.sendKeys("1");
 
         // get min / max data
-        // ??? add possibility read from page these parameters !!!
-        String numbersMax = browser.findElement(By.cssSelector("input[name = 'max']")).getText();
+        // TODO: ??? add possibility read from page these min/max parameters !!!
+        String numbersMax = browser.findElement(By.cssSelector("input[name = 'max']")).getText().replaceAll("\n", " ");
         String numbersMin = browser.findElement(By.cssSelector("input[name = 'min']")).getText();
 
         // go to result page
@@ -50,7 +50,7 @@ public class L121_AppTestUp {
         int numbersInt = Integer.parseInt(numbers.replaceAll( "[^\\d]", "" ));;
         System.out.print(numbersInt);
 
-        // assert: is that new int within mix (0) / max (10)
+        // assert: is that new int within mix (0) / max (10->100)
         Assert.assertTrue(numbersInt >= 0 && numbersInt <= 10, "Negative case message: ");
 
     }
