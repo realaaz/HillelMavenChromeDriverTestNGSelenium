@@ -34,9 +34,10 @@ public class L121_AppTestUp {
         numberOfIntegers.sendKeys("1");
 
         // get min / max data
-        // TODO: ??? add possibility read from page these min/max parameters !!!
-        String numbersMax = browser.findElement(By.cssSelector("input[name = 'max']")).getText().replaceAll("\n", " ");
-        String numbersMin = browser.findElement(By.cssSelector("input[name = 'min']")).getText();
+        String numbersMax = browser.findElement(By.cssSelector("input[name = 'max']")).getAttribute("value").replaceAll("\n", " ");
+        String numbersMin = browser.findElement(By.cssSelector("input[name = 'min']")).getAttribute("value").replaceAll("\n", " ");;
+
+        //cssSelector("*[attributeName='value']"))
 
         // go to result page
         browser.findElement(By.cssSelector("input[value = 'Get Numbers']")).click();
@@ -48,10 +49,12 @@ public class L121_AppTestUp {
 
         // convert to int
         int numbersInt = Integer.parseInt(numbers.replaceAll( "[^\\d]", "" ));;
-        System.out.print(numbersInt);
+        int numbersMaxInt = Integer.parseInt(numbersMax.replaceAll( "[^\\d]", "" ));;
+        int numbersMinInt = Integer.parseInt(numbersMin.replaceAll( "[^\\d]", "" ));;
+        //System.out.print(numbersInt);
 
         // assert: is that new int within mix (0) / max (10->100)
-        Assert.assertTrue(numbersInt >= 0 && numbersInt <= 10, "Negative case message: ");
+        Assert.assertTrue(numbersInt >= numbersMinInt && numbersInt <= numbersMaxInt, "Negative case message: ");
 
     }
 
